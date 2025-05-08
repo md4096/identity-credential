@@ -2,24 +2,12 @@ import org.apache.commons.io.output.ByteArrayOutputStream
 
 // For `versionCode` we just use the number of commits.
 val projectVersionCode: Int by extra {
-    val stdout = ByteArrayOutputStream()
-    rootProject.exec {
-        commandLine("git", "rev-list", "HEAD", "--count")
-        standardOutput = stdout
-    }
-    @Suppress("DEPRECATION") // toString() is deprecated.
-    stdout.toString().trim().toInt()
+    99
 }
 
 // For versionName, we use the output of: git describe --tags --dirty
 val projectVersionName: String by extra {
-    val stdout = ByteArrayOutputStream()
-    rootProject.exec {
-        commandLine("git", "describe", "--tags", "--dirty")
-        standardOutput = stdout
-    }
-    @Suppress("DEPRECATION") // toString() is deprecated.
-    stdout.toString().trim()
+    "projectVersionName"
 }
 
 plugins {
