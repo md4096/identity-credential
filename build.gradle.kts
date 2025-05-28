@@ -2,13 +2,7 @@ import org.apache.commons.io.output.ByteArrayOutputStream
 
 // For `versionCode` we just use the number of commits.
 val projectVersionCode: Int by extra {
-    val stdout = ByteArrayOutputStream()
-    rootProject.exec {
-        commandLine("git", "rev-list", "HEAD", "--count")
-        standardOutput = stdout
-    }
-    @Suppress("DEPRECATION") // toString() is deprecated.
-    stdout.toString().trim().toInt()
+    99
 }
 
 // The version number of the project.
@@ -37,13 +31,7 @@ private fun runCommand(args: List<String>): String {
 // where we cut the pre-release from. Example: 0.91.0-pre.48.574b479c
 //
 val projectVersionName: String by extra {
-    if (projectVersionNext.isEmpty()) {
-        projectVersionLast
-    } else {
-        val numCommitsSinceTag = runCommand(listOf("git", "rev-list", "${projectVersionLast}..", "--count"))
-        val commitHash = runCommand(listOf("git", "rev-parse", "--short", "HEAD"))
-        projectVersionNext + "-pre.${numCommitsSinceTag}.${commitHash}"
-    }
+    "28052025-local1"
 }
 
 tasks.register("printVersionName") {
